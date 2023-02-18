@@ -10,7 +10,7 @@ rem Database Password; leave it empty if there is not password
 SET DB_PASS=
 rem Database Name
 SET DB_NAME=DATABASE_NAME
-/rem Set the interval in minutes to save the database
+rem Set the interval in minutes to save the database
 SET INTERVAL_MINUTES=30
 rem Add your webhook url below
 SET WEBHOOK_URL=WEBHOOK_LINK
