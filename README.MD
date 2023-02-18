@@ -10,8 +10,8 @@ Preview: [Streamable](https://streamable.com/37w13z "Streamable")
 - Compress the SQL file making it smaller
 
 ### Tools:
-7zip.exe  (x64 bits): [Link](https://www.7-zip.org/download.html "Link")
-JSON query (x64 bits)): [Links](https://stedolan.github.io/jq/download "Links")
+- 7zip.exe  (x64 bits): [Link](https://www.7-zip.org/download.html "Link")
+- JSON query (x64 bits)): [Links](https://stedolan.github.io/jq/download "Links")
 
 ### Install
 - Download SQLDumper
