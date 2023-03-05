@@ -22,6 +22,11 @@ Preview: [Streamable](https://streamable.com/37w13z "Streamable")
 - Edit INTERVAL_MINUTES (default 30 minutes)
 - Run SQLDumper.bat
 
-### Note
-Windows x32/86: Download and install 7zip and copy from %ProgramFiles%\7-Zip\7zip.exe to .\lib\ and replace 7zip.exe;
-Download "jq-win32.exe" and rename to "jq.exe" and then copy it to .\lib\ and replace jq.exe.
+### To Windows x32/x86 users:
+
+- Download and install [7zip x86](https://www.7-zip.org/download.html "7zip").
+- Locate the `7zip.exe` file in the installation directory `%ProgramFiles%\7-Zip` and copy it to the `.\lib\` folder.
+- Download [jq-win32.exe](https://stedolan.github.io/jq/download/ "jq-win32.exe") and rename it to `jq.exe`.
+- Replace the `jq.exe` file in the `.\lib\` folder with the renamed one.
+
+With these steps, you should now be able to use **SQLDumper** on your Windows x32/86 system.
