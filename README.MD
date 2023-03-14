@@ -12,8 +12,10 @@ Preview: [Streamable](https://streamable.com/37w13z "Streamable")
 ### Tools:
 - 7zip.exe  (x64 bits): [Link](https://www.7-zip.org/download.html "Link")
 - JSON query (x64 bits)): [Links](https://stedolan.github.io/jq/download "Links")
+- CURL (Already integrated into Windows 10/11): [Link](https://curl.se/windows/ "Link")
 
 ### Install
+- Check if CURL is installed (CMD: `curl --version`)
 - Download SQLDumper
 - Open SQLDumper.bat with a text editor
 - Configure HOST_ADDRESS, DB_USER, DB_PASS, DB_NAME
