@@ -23,7 +23,6 @@ SET EMBED_COLOR=3447003
 SET EMBED_MESSAGE=File saved at
 SET EMBED_TITLE=SQLDumper
 
-
 rem Do not change anything below unless you know what you are doing
 rem ////////////////////////////////////////////////////////////////////////////
 
@@ -44,8 +43,8 @@ IF NOT EXIST ".\lib\jq.exe" (
     GOTO EndScript
 )
 
+SET /A "INTERVAL_SECONDS=%INTERVAL_MINUTES%*60"
 SET MINUTES=%INTERVAL_MINUTES%
-SET /A "INTERVAL_MINUTES*=60"
 :LOOP
 
 FOR /F "delims=" %%a in ('wmic OS Get localdatetime  ^| find "."') do SET dt=%%a
@@ -63,18 +62,24 @@ CLS
 SET /A num=(%Random% %%9)+1
 COLOR %num%                                               
 ECHO.
-ECHO _______________________________________________
-ECHO " _____ _____ __    ____                        "
-ECHO "|   __|     |  |  |    \ _ _ _____ ___ ___ ___ "
-ECHO "|__   |  |  |  |__|  |  | | |     | . | -_|  _|"
-ECHO "|_____|__  _|_____|____/|___|_|_|_|  _|___|_|  "
-ECHO "         |__|                     |_|          "
-ECHO "_______________________________________________"
+ECHO 	_______________________________________________
+ECHO 	" _____ _____ __    ____                        "
+ECHO 	"|   __|     |  |  |    \ _ _ _____ ___ ___ ___ "
+ECHO 	"|__   |  |  |  |__|  |  | | |     | . | -_|  _|"
+ECHO 	"|_____|__  _|_____|____/|___|_|_|_|  _|___|_|  "
+ECHO 	"         |__|                     |_|          "
+ECHO 	"_______________________________________________"
 ECHO.
 ECHO.
-ECHO Please wait %INTERVAL_MINUTES% seconds (%MINUTES% minutes)...
-TIMEOUT /T %INTERVAL_MINUTES% /NOBREAK >NUL
-TIMEOUT /T 5 /NOBREAK >NUL
+ECHO Please wait %MINUTES% minute(s)...
+TIMEOUT /T 60 /NOBREAK >NUL
+SET /A MINUTES-=1
+
+IF %MINUTES% GTR 0 (
+    GOTO LOOP
+)
+
+SET MINUTES=%INTERVAL_MINUTES%
 
 IF NOT "%HOST_ADDRESS%"=="" (
     IF NOT "%DB_PASS%"=="" (
@@ -110,13 +115,13 @@ SET MESSAGE=%EMBED_MESSAGE% %HH%:%Min%:%Sec%, %DD%/%MM%/%YYYY%
 .\lib\curl.exe -H "Content-Type: multipart/form-data" -F "payload_json={\"embeds\":[{\"title\": \"%EMBED_TITLE%\",\"description\": \"%MESSAGE%\",\"color\": %EMBED_COLOR%}], \"username\": \"%AVATAR_NAME%\", \"avatar_url\": \"%AVATAR_URL%\"}" -F "file=@%zip_file%" "%WEBHOOK_URL%" > %temp%
 IF ERRORLEVEL 1 (
     ECHO ERROR: Failed to send webhook.
-    GOTO Cleanup
+    GOTO Message
 )
 
 .\lib\jq.exe -r ".attachments[].url" %temp% >> logs.txt
 IF ERRORLEVEL 1 (
     ECHO ERROR: Failed to extract URL from JSON.
-    GOTO Cleanup
+    GOTO Message
 )
 
 CLS
@@ -132,7 +137,7 @@ DEL /Q %backup_file%
 DEL /Q %temp%
 GOTO LOOP
 
-:Cleanup
+:Message
 ECHO Failed to execute the operation successfully.
 EXIT /B
 
