@@ -96,7 +96,7 @@ IF NOT "%HOST_ADDRESS%"=="" (
 )
 
 SET zip_file=%backup_file:.sql=.zip%
-.\lib\7z.exe a -tzip "%zip_file%" "%backup_file%"
+.\lib\7z.exe a -tzip "%zip_file%" "%backup_file%" -bd -y >nul 2>&1
 CLS
 ECHO Dumping database to file...
 ECHO Compressing file...
